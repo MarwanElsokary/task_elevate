@@ -1,4 +1,4 @@
-import 'package:task_elevate/models/GetData.dart';
+import 'package:task_elevate/models/card_model.dart';
 
 abstract class HomeState {}
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task_elevate/bolc/cubit.dart';
-import 'package:task_elevate/bolc/states.dart';
+import 'package:task_elevate/bolc/home_cubit.dart';
+import 'package:task_elevate/bolc/home_state.dart';
 
 import '../widget/card_item.dart';
 

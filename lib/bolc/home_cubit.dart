@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
-import 'package:task_elevate/bolc/states.dart';
-import '../models/GetData.dart';
+import 'package:task_elevate/bolc/home_state.dart';
+import '../models/card_model.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitState());
