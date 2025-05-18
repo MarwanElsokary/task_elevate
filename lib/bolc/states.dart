@@ -7,13 +7,11 @@ class HomeInitState extends HomeState {}
 class HomeGetLoadingState extends HomeState {}
 
 class HomeGetSuccessState extends HomeState {
-  GetData getData;
-
-  HomeGetSuccessState(this.getData);
+  final List<GetData> products;
+  HomeGetSuccessState(this.products);
 }
 
 class HomeGetErrorState extends HomeState {
-  String error = "Something went Worng";
-
+  final String error;
   HomeGetErrorState(this.error);
 }

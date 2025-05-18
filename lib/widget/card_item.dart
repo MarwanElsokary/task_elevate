@@ -1,75 +1,111 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../models/GetData.dart';
 
 class CardItem extends StatelessWidget {
-  GetData item;
+  final GetData item;
 
-  CardItem({required this.item, super.key});
+  const CardItem({required this.item, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 322,
-      margin: EdgeInsets.all(12),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(25)),
-        border: Border.all(color: Colors.white),
+    return Card(
+      elevation: 0,
+
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(color: Colors.blueGrey, width: 2),
       ),
+      color: Colors.transparent,
+
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(12),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25),
-                topRight: Radius.circular(25),
-              ),
-              child: Image.network(item.image ?? ""),
-            ),
-            SizedBox(height: 10),
-            Text(
-              item.title ?? "",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-              ),
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.clip,
-              maxLines: 2,
-            ),
-            Spacer(),
-            Row(
+            Stack(
               children: [
-                Expanded(
-                  child: Text(
-                    "By: ${item.price ?? ""}",
-                    textAlign: TextAlign.left,
-                    maxLines: 1,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                    ),
+                Center(
+                  child: Image.network(
+                    item.image ?? '',
+                    height: 120,
+                    fit: BoxFit.fill,
+                    errorBuilder:
+                        (context, error, stackTrace) =>
+                            const Icon(Icons.error, size: 60),
                   ),
                 ),
-                Spacer(),
-                Expanded(
-                  child: Text(
-                    (item.price ?? 0) as String,
-                    textAlign: TextAlign.end,
-                    maxLines: 1,
-
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+                Padding(
+                  padding: const EdgeInsets.all(6),
+                  child: Align(
+                    child: ImageIcon(
+                      AssetImage("assets/images/icon_fav.png"),
+                      color: Colors.indigo,
                     ),
+                    alignment: Alignment.topRight,
                   ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+
+            Text(
+              item.title ?? 'No title',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.blueGrey,
+              ),
+            ),
+            const SizedBox(height: 4),
+
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      'EGP ${item.price?.toStringAsFixed(0) ?? '0'}',
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
+                    ),
+                    SizedBox(width: 4),
+                    Text(
+                      '${((item.price ?? 0) + 200).toStringAsFixed(0)} EGP',
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blueGrey,
+                        inherit: true,
+                        decoration: TextDecoration.lineThrough,
+                        decorationColor: Colors.blueGrey,
+                        decorationThickness: 2,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(width: 4),
+                    Text(
+                      'Review (${item.rating?.rate?.toStringAsFixed(1) ?? '0.0'})',
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                    const Icon(Icons.star, color: Colors.amber, size: 16),
+                    Spacer(),
+                    ImageIcon(
+                      AssetImage("assets/images/icon_add.png"),
+                      color: Colors.indigo,
+                    ),
+                  ],
                 ),
               ],
             ),
